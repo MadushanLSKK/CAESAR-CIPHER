@@ -69,7 +69,20 @@ int main() {
         encrypt(message, key, result);
         printf("*****************************\n");
         printf("Encrypted Message: %s\n", result);
-    } 
+    } else if (choice == 'D' || choice == 'd') {
+        printf("Enter encrypted message: ");
+        fgets(message, sizeof(message), stdin);
+        message[strcspn(message, "\n")] = '\0';
+
+        printf("Enter shift key: ");
+        scanf("%d", &key);
+
+        decrypt(message, key, result);
+        printf("*****************************\n");
+        printf("Original Message: %s\n", result);
+    } else {
+        printf("Invalid choice. Please enter 'E' or 'D'.\n");
+    }
 
     return 0;
 }
