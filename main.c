@@ -48,36 +48,43 @@ void decrypt(char *message, int key, char *result) {
 }
 
 int main() {
-    char choice;
-    char message[1000], result[1000];
-    int key;
+    char choice;// User choice: E for encryption, D for decryption
 
-    initQueue();
+    char message[1000];// Original or encrypted input message,
+    char result[1000];// Result after encryption or decryption
+ 
+    int key; // Shift key
 
+    initQueue(); // Initialize the alphabet queue
+
+    // Ask user for encryption or decryption mode
     printf("Encryption (E) or Decryption (D)?: ");
     scanf(" %c", &choice);
-    getchar(); // clear newline
+    getchar(); // clear newline character from input buffer
+
 
     if (choice == 'E' || choice == 'e') {
+        // Encryption mode
         printf("Enter your message: ");
-        fgets(message, sizeof(message), stdin);
-        message[strcspn(message, "\n")] = '\0';
+        fgets(message, sizeof(message), stdin); // Read message input
+        message[strcspn(message, "\n")] = '\0'; // Remove newline
 
         printf("Enter shift key: ");
         scanf("%d", &key);
 
-        encrypt(message, key, result);
+        encrypt(message, key, result); // Call encryption function
         printf("*****************************\n");
         printf("Encrypted Message: %s\n", result);
     } else if (choice == 'D' || choice == 'd') {
+        // Decryption mode
         printf("Enter encrypted message: ");
-        fgets(message, sizeof(message), stdin);
-        message[strcspn(message, "\n")] = '\0';
+        fgets(message, sizeof(message), stdin);// Read encrypted message
+        message[strcspn(message, "\n")] = '\0'; // Remove newline
 
         printf("Enter shift key: ");
         scanf("%d", &key);
 
-        decrypt(message, key, result);
+        decrypt(message, key, result); // Call decryption function
         printf("*****************************\n");
         printf("Original Message: %s\n", result);
     } else {
